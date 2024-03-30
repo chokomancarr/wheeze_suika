@@ -21,6 +21,17 @@ const MT = Matter;
  */
 
 (async () => {
+    //preload images
+    async function load_one(url) {
+        return new Promise(ok => {
+            var img=new Image();
+            img.src=url;
+            img.onload = ok;
+        });
+    }
+    await Promise.all(Array(10).fill(0).map((_, i) => load_one(`res/balls/${i + 1}.png`)));
+    $I("loading").style.display = "none";
+
     const G = 0.001;
     const PHY_SCL = 100;
 
